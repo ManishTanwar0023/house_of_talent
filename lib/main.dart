@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:house_of_talent/Test/LoginScreen_Test.dart';
 import 'package:house_of_talent/utils.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: Splash_Screen(),
     );
   }
 }

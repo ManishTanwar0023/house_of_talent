@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:house_of_talent/Colors/Palette.dart';
-
-import 'Competition_Result.dart';
 import '../CustomWidgets/buildCompetitionItem.dart';
 
 class ParticipatedCompetition extends StatelessWidget {
