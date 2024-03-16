@@ -61,8 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
         durationInMilliSeconds: 300,
         bottomBarItems: [
           BottomBarItem(
-            inActiveItem: Image(image: AssetImage('assets/images/award.png')),
-            activeItem: Image(image: AssetImage('assets/images/award.png')),
+            inActiveItem: Image(image: AssetImage('assets/images/comp.png')),
+            activeItem: Image(image: AssetImage('assets/images/comp.png')),
             itemLabel: 'Competition',
 
           ),
@@ -73,8 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
           ),
           BottomBarItem(
-            inActiveItem: Image(image: AssetImage('assets/images/video-colored.png')),
-            activeItem: Image(image: AssetImage('assets/images/video-colored.png')),
+            inActiveItem: Image(image: AssetImage('assets/images/Add_video.png')),
+            activeItem: Image(image: AssetImage('assets/images/Add_video.png')),
             itemLabel: 'Add Video',
 
           ),
@@ -85,8 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
           ),
           BottomBarItem(
-            inActiveItem: Image(image: AssetImage('assets/images/man.png')),
-            activeItem: Image(image: AssetImage('assets/images/man.png')),
+            inActiveItem: Image(image: AssetImage('assets/images/profile.png')),
+            activeItem: Image(image: AssetImage('assets/images/profile.png')),
             itemLabel: 'My Profile',
 
           ),
