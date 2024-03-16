@@ -8,8 +8,8 @@ class ParticipatedCompetition extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Participated Competitions'),
+        appBar: AppBar(automaticallyImplyLeading: false,
+          title: Center(child: Text('Participated Competitions')),
         ),
         body: SingleChildScrollView(
           child: Padding(

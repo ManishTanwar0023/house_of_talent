@@ -18,8 +18,8 @@ class _Cmt_LoginState extends State<Cmt_Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat Login'),
+      appBar: AppBar(automaticallyImplyLeading: false,
+        title: Center(child: Text('Chat Login')),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -41,7 +41,7 @@ class _Cmt_LoginState extends State<Cmt_Login> {
                         labelText: 'User Name',
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 40,),
                     ElevatedButton(onPressed: () async {
                       await ZIMKit().connectUser(id: userId.text,name: userName.text);
                       Navigator.push(context, MaterialPageRoute(builder: (context) => Cmt_Screen(),));

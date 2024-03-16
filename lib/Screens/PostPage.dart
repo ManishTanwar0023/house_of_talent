@@ -17,7 +17,7 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(automaticallyImplyLeading: false,
         title: Text(
           'Post',
           style: TextStyle(fontWeight: FontWeight.bold),

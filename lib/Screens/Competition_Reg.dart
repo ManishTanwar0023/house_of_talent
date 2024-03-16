@@ -24,9 +24,8 @@ class _Competition_RegState extends State<Competition_Reg> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(left: 40),
+      appBar: AppBar(automaticallyImplyLeading: false,
+        title: Center(
           child: Text(
             'Competition',
             style: TextStyle(fontWeight: FontWeight.w400, fontSize: 25),

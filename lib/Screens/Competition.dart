@@ -35,7 +35,7 @@ class _CompetitionState extends State<Competition> with TickerProviderStateMixin
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(automaticallyImplyLeading: false,
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(

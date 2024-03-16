@@ -22,7 +22,7 @@ class _Competition_ResultState extends State<Competition_Result> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
+        appBar: AppBar(automaticallyImplyLeading: false,
           title: Text('Participated Competitions'),
         ),
         body: SingleChildScrollView(

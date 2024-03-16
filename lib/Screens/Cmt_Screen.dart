@@ -14,7 +14,7 @@ class _Cmt_ScreenState extends State<Cmt_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(automaticallyImplyLeading: false,
         title: Text('Conversation'),
         actions: [HomePagePopupMenuButton()],
       ),
