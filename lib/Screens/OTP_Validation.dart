@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
+import 'package:house_of_talent/Screens/HomeScreen.dart';
 
 import '../Colors/Palette.dart';
 import '../CustomWidgets/BuildButton_CustomWidget.dart';
@@ -138,7 +139,7 @@ class _OTP_ValidationState extends State<OTP_Validation> {
                     ),
                     SizedBox(height: size.height * 0.18),
                     buildButton('Resend OTP', () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Competition(),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                     }),
                   ],
                 ),
