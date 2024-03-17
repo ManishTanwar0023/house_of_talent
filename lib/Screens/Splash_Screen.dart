@@ -39,7 +39,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
           child: Container(
             height: size.height,
             width: size.width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/BGR_LOGO_1.png'))),
           ),

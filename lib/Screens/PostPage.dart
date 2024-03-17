@@ -4,7 +4,7 @@ import 'package:house_of_talent/CustomWidgets/TermAndConditionCustomText.dart';
 import '../CustomWidgets/BuildButtonWithIcon_CustomWidget.dart';
 
 class PostPage extends StatefulWidget {
-  const PostPage();
+  const PostPage({super.key});
 
   @override
   State<PostPage> createState() => _PostPageState();
@@ -18,13 +18,13 @@ class _PostPageState extends State<PostPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           'Post',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0),
+          preferredSize: const Size.fromHeight(4.0),
           child: Container(
             color: Colors.black,
             height: 1.0,
@@ -45,9 +45,12 @@ class _PostPageState extends State<PostPage> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 1, color: Colors.black),
                     ),
-                    child: Image(image: AssetImage('assets/images/girl.png'),fit: BoxFit.cover,),
+                    child: const Image(
+                      image: AssetImage('assets/images/girl.png'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Container(
                     height: size.height * 0.25,
                     width: size.width * 0.59,
@@ -55,8 +58,8 @@ class _PostPageState extends State<PostPage> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 1, color: Colors.black),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: TextField(
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -71,29 +74,42 @@ class _PostPageState extends State<PostPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(children: [
+                  const Row(
+                    children: [
                     Icon(Icons.lock,size: 30,),
                     Text('Who Can View This Video',style: TextStyle(fontWeight: FontWeight.w500),),
                 
                   ],),
                   Row(
                     children: [
-                      Text('Public',style: TextStyle(fontWeight: FontWeight.bold),),
+                      const Text(
+                        'Public',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       InkWell(
                           onTap: (){},
-                          child: Icon(Icons.arrow_forward_ios_outlined,size: 30,)),
+                          child: const Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            size: 30,
+                          )),
                     ],
                   ),
                 ],
               ),
-              SizedBox(height: 5,),
+              const SizedBox(
+                height: 5,
+              ),
               Container(height: 2,
                 width: double.infinity,
                 decoration: BoxDecoration(border: Border.all(width: 1)),),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Row(children: [
                 Checkbox(
                   value: isChecked,
@@ -109,7 +125,9 @@ class _PostPageState extends State<PostPage> {
               InkWell(
                 onTap: (){},
                   child: buildButtonWithIcon(Icons.drafts_outlined, 'Draft')),
-              SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               InkWell(
                 onTap: (){},
                   child: buildButtonWithIcon(Icons.cloud_upload, 'Post Video'))
