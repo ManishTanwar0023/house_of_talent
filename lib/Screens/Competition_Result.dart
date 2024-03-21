@@ -156,33 +156,6 @@ class _Competition_ResultState extends State<Competition_Result> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Profile()),
-                      );
-                    },
-                    child: Container(
-                      height: 40,
-                      width: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.indigo,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Profile',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Material(
-                  // Wrap InkWell with Material for touch effects
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
                         MaterialPageRoute(builder: (context) => Cmt_Login()),
                       );
                     },

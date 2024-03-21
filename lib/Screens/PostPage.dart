@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:house_of_talent/CustomWidgets/TermAndConditionCustomText.dart';
 
 import '../CustomWidgets/BuildButtonWithIcon_CustomWidget.dart';
+import 'FilePicker.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage();
@@ -111,7 +112,11 @@ class _PostPageState extends State<PostPage> {
                   child: buildButtonWithIcon(Icons.drafts_outlined, 'Draft')),
               SizedBox(height: 15,),
               InkWell(
-                onTap: (){},
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CustomFilePicker();
+                  },));
+                },
                   child: buildButtonWithIcon(Icons.cloud_upload, 'Post Video'))
             ],
           ),

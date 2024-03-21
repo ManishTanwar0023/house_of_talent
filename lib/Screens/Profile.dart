@@ -5,7 +5,9 @@ import 'Personal Information.dart';
 import 'Wallet.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key});
+  final String Insta;
+  final String YT;
+  const Profile({required this.Insta,required this.YT});
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -152,7 +154,9 @@ class _ProfileState extends State<Profile> {
                 children: [
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfile(),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return EditProfile();
+                      }));
                     },
                     child: Container(
                       height: 50,
