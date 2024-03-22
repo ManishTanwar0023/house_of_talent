@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     PostPage(),
     Cmt_Login(),
-    Profile(Insta: '', YT: '',),
+    Profile(),
   ];
 
   @override

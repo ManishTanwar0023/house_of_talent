@@ -5,9 +5,8 @@ import 'Personal Information.dart';
 import 'Wallet.dart';
 
 class Profile extends StatefulWidget {
-  final String Insta;
-  final String YT;
-  const Profile({required this.Insta,required this.YT});
+
+  const Profile();
 
   @override
   State<Profile> createState() => _ProfileState();

@@ -30,9 +30,6 @@ class _EditProfileState extends State<EditProfile> {
             IconButton(
               onPressed: () {
                 editProfile(context, type: "Edit", fname: Name.text, lname: '', email: '', ph: '', gender: '', DOB: '', username: UserName.text, image: '', BIO: Bio.text, Insta: Insta.text, YT: YT.text);
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Profile(Insta: Insta.text, YT: YT.text,);
-                },));
                 },
               icon: Icon(Icons.check),
             )

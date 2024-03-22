@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:house_of_talent/Model/ApiCallingMethods.dart';
+import 'package:house_of_talent/Screens/Wallet.dart';
 
 import '../CustomWidgets/Wallet_CustomWidget.dart';
 
@@ -39,7 +41,10 @@ class _AddBankState extends State<AddBank> {
               buildFieldRow2('UPI ID', 'UPI ID', 'assets/images/upi.png', UPI),
               SizedBox(height: 2,),
               buildFieldRow2('Bank Branch', 'Bank Branch', 'assets/images/bank.png', Bank),
-              SizedBox(height: 2,),
+              SizedBox(height: 20,),
+              ElevatedButton(onPressed: (){
+                updateBank(context, Holdername: PersonName.text, Account: Account.text, phone: Phone.text, IFSC: IFSC.text, UPI: UPI.text, bankbranch: Bank.text);
+              }, child: Text('Update'))
               
             ],
           ),

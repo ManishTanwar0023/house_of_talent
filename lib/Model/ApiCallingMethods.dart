@@ -5,6 +5,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:house_of_talent/CustomWidgets/Register_CustomWidgets.dart';
 import 'package:house_of_talent/Screens/HomeScreen.dart';
+import 'package:house_of_talent/Screens/PostPage.dart';
+import 'package:house_of_talent/Screens/Profile.dart';
+import 'package:house_of_talent/Screens/Wallet.dart';
 import 'package:http/http.dart' as http;
 
 String baseUrl = 'https://testingonme.com/APIFolder/WebService1.asmx';
@@ -180,12 +183,19 @@ Future<void> editProfile(
     );
 
     if (response.statusCode == 200) {
-      // Handle success
+      var Response = jsonDecode(response.body)[
+      "message"
+      ];
+      if(Response == "Updated!"){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(),));
+      }else{
+        snackbar(context, Response, 'Something Went Wrong');
+      }
     } else {
-      // Handle failure
+      throw Exception('Failed to load data');
     }
   } catch (e) {
-    // Handle error
+    print(e);
   }
 }
 
@@ -215,12 +225,20 @@ Future<void> insertBank(
     );
 
     if (response.statusCode == 200) {
-      // Handle success
+      print('data successfully Added');
+      var Response = jsonDecode(response.body)[
+      "message"
+      ];
+      if(Response == "Bank Inserted!"){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Wallet(),));
+      }else{
+        snackbar(context, Response, 'Something Went Wrong');
+      }
     } else {
-      // Handle failure
+      throw Exception('Failed to load data');
     }
   } catch (e) {
-    // Handle error
+    print(e);
   }
 }
 
@@ -437,12 +455,20 @@ Future<void> updateBank(
     );
 
     if (response.statusCode == 200) {
-      // Handle success
+      print('data successfully Added');
+      var Response = jsonDecode(response.body)[
+        "message"
+      ];
+      if(Response == "Bank Inserted!"){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Wallet(),));
+      }else{
+        snackbar(context, Response, 'Something Went Wrong');
+      }
     } else {
-      // Handle failure
+      throw Exception('Failed to load data');
     }
   } catch (e) {
-    // Handle error
+    print(e);
   }
 }
 
@@ -463,6 +489,46 @@ Future<void> updateLikes(
 
     if (response.statusCode == 200) {
       // Handle success
+    } else {
+      // Handle failure
+    }
+  } catch (e) {
+    // Handle error
+  }
+}
+
+Future<void> AddPost(
+    BuildContext context, {
+      required String mode,
+      required String D,
+      required String Thumbnail,
+      required String creator,
+      required String video,
+    }) async {
+  Map<String, String> requestBody = {
+    'token': token,
+    'mode': mode,
+    'D': D,
+    'Thumbnail': Thumbnail,
+    'creator': creator,
+    'video': video,
+  };
+
+  try {
+    http.Response response = await http.post(
+      Uri.parse('$baseUrl/AddPost'),
+      body: requestBody,
+    );
+
+    if (response.statusCode == 200) {
+      var Response = jsonDecode(response.body)[
+      "message"
+      ];
+      if(Response == "Insert!"){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PostPage(),));
+      }else{
+        snackbar(context, Response, 'Something Went Wrong');
+      }
     } else {
       // Handle failure
     }

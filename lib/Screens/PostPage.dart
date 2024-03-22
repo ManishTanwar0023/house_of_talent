@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:house_of_talent/CustomWidgets/TermAndConditionCustomText.dart';
+import 'package:house_of_talent/Model/ApiCallingMethods.dart';
 
 import '../CustomWidgets/BuildButtonWithIcon_CustomWidget.dart';
-import 'FilePicker.dart';
+import 'CustomFilePicker.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage();
@@ -13,12 +14,16 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   bool isChecked = false;
+  bool videoUploaded = false;
+  String video = 'assets/images/girl.png';
 
   @override
   Widget build(BuildContext context) {
+    var description = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Post',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -46,7 +51,7 @@ class _PostPageState extends State<PostPage> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 1, color: Colors.black),
                     ),
-                    child: Image(image: AssetImage('assets/images/girl.png'),fit: BoxFit.cover,),
+                    child: Image(image: AssetImage(video), fit: BoxFit.cover),
                   ),
                   SizedBox(width: 8),
                   Container(
@@ -59,65 +64,102 @@ class _PostPageState extends State<PostPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        controller: description,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Describe your video',
-                          hintStyle: TextStyle(fontSize: 12), // Set the font size here
+                          hintStyle: TextStyle(fontSize: 12),
                         ),
                         maxLines: 8,
                         maxLength: 250,
-                        style: TextStyle(fontSize: 12), // Set the font size of entered text here
+                        style: TextStyle(fontSize: 12),
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20,),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(children: [
-                    Icon(Icons.lock,size: 30,),
-                    Text('Who Can View This Video',style: TextStyle(fontWeight: FontWeight.w500),),
-                
-                  ],),
                   Row(
                     children: [
-                      Text('Public',style: TextStyle(fontWeight: FontWeight.bold),),
+                      Icon(Icons.lock, size: 30),
+                      Text(
+                        'Who Can View This Video',
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Public',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       InkWell(
-                          onTap: (){},
-                          child: Icon(Icons.arrow_forward_ios_outlined,size: 30,)),
+                        onTap: () {},
+                        child: Icon(Icons.arrow_forward_ios_outlined, size: 30),
+                      ),
                     ],
                   ),
                 ],
               ),
-              SizedBox(height: 5,),
-              Container(height: 2,
+              SizedBox(height: 5),
+              Container(
+                height: 2,
                 width: double.infinity,
-                decoration: BoxDecoration(border: Border.all(width: 1)),),
-              SizedBox(height: 10,),
-              Row(children: [
-                Checkbox(
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value ?? false;
-                    });
-                  },
-                ),
-                TermAndConditionCustomText(),
-              ],),
-              SizedBox(height: size.height*0.2),
+                decoration: BoxDecoration(border: Border.all(width: 1)),
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Checkbox(
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value ?? false;
+                      });
+                    },
+                  ),
+                  TermAndConditionCustomText(),
+                ],
+              ),
+              SizedBox(height: size.height * 0.2),
               InkWell(
-                onTap: (){},
-                  child: buildButtonWithIcon(Icons.drafts_outlined, 'Draft')),
-              SizedBox(height: 15,),
-              InkWell(
-                onTap: (){
+                onTap: () {},
+                child: buildButtonWithIcon(Icons.drafts_outlined, 'Draft'),
+              ),
+              SizedBox(height: 15),
+              SizedBox(height: 15),
+              videoUploaded
+                  ? InkWell(
+                onTap: () {
+                  AddPost(
+                    context,
+                    mode: "Public",
+                    D: description.text,
+                    Thumbnail: '',
+                    creator: '',
+                    video: video,
+                  );
+                },
+                child: buildButtonWithIcon(Icons.cloud_upload, 'Submit'),
+              )
+                  : InkWell(
+                onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return CustomFilePicker();
-                  },));
+                  })).then((value) {
+                    if (value != null && value) {
+                      setState(() {
+                        videoUploaded = true;
+                      });
+                    }
+                  });
                 },
-                  child: buildButtonWithIcon(Icons.cloud_upload, 'Post Video'))
+                child: buildButtonWithIcon(Icons.cloud_upload, 'Post Video'),
+              ),
             ],
           ),
         ),
