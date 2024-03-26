@@ -67,6 +67,7 @@ class _LogInState extends State<LogIn> {
                     SizedBox(height: size.height*0.25),
                     buildButton('Send OTP', () {
                       register(context, type: 'Login', fname: " ", lname: " ", email: " ", ph: phone_num.text, gender: " ", DOB: " ", username: " ", image: " ", BIO: " ", Insta: " ", YT: " ");
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => OTP_Validation(phone: phoneNum.text),));
                     }),
                   ],
                 ),
