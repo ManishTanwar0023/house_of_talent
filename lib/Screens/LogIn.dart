@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:house_of_talent/Model/ApiCallingMethods.dart';
 
 import '../Colors/Palette.dart';
 import '../CustomWidgets/BuildButton_CustomWidget.dart';
@@ -12,6 +13,8 @@ class LogIn extends StatefulWidget {
   @override
   State<LogIn> createState() => _LogInState();
 }
+
+var phoneNum = TextEditingController();
 
 class _LogInState extends State<LogIn> {
   @override
@@ -60,10 +63,10 @@ class _LogInState extends State<LogIn> {
                       ),
                     ),
                     SizedBox(height: size.height*0.08),
-                    buildFieldRow('Phone No.', 'Phone No.','assets/images/phone.png', phone_num),
+                    buildFieldRow('Phone No.', 'Phone No.','assets/images/phone.png', phoneNum),
                     SizedBox(height: size.height*0.25),
                     buildButton('Send OTP', () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => OTP_Validation(),));
+                      register(context, type: 'Login', fname: " ", lname: " ", email: " ", ph: phone_num.text, gender: " ", DOB: " ", username: " ", image: " ", BIO: " ", Insta: " ", YT: " ");
                     }),
                   ],
                 ),

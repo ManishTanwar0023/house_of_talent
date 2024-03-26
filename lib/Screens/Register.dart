@@ -71,7 +71,6 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 30),
                     buildButton('Register', () {
                       register(context, type: 'Register', fname: firstname.text, lname: lastname.text, email: email.text, ph: phone_num.text, gender: " ", DOB: " ", username: " ", image: " ", BIO: " ", Insta: " ", YT: " ");
-                        snackbar(context,'Registration', 'Your Data Successfully Registered');
                       }),
                     SizedBox(height: 10),
                     buildButton('Log In', () {

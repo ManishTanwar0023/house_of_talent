@@ -1,9 +1,14 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:house_of_talent/CustomWidgets/TermAndConditionCustomText.dart';
 import 'package:house_of_talent/Model/ApiCallingMethods.dart';
+import 'package:path/path.dart' as path;
+import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../CustomWidgets/BuildButtonWithIcon_CustomWidget.dart';
-import 'CustomFilePicker.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage();
@@ -16,6 +21,15 @@ class _PostPageState extends State<PostPage> {
   bool isChecked = false;
   bool videoUploaded = false;
   String video = 'assets/images/girl.png';
+  List<File> pickedFiles = [];
+  bool isfilled = false;
+  late String userid ='';
+
+  @override
+  void initState() {
+    super.initState();
+    retrieveData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +65,7 @@ class _PostPageState extends State<PostPage> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 1, color: Colors.black),
                     ),
-                    child: Image(image: AssetImage(video), fit: BoxFit.cover),
+                    child: Image.asset(video, fit: BoxFit.cover),
                   ),
                   SizedBox(width: 8),
                   Container(
@@ -122,7 +136,7 @@ class _PostPageState extends State<PostPage> {
                       });
                     },
                   ),
-                  TermAndConditionCustomText(),
+                  TermAndConditionCustomText()
                 ],
               ),
               SizedBox(height: size.height * 0.2),
@@ -131,32 +145,19 @@ class _PostPageState extends State<PostPage> {
                 child: buildButtonWithIcon(Icons.drafts_outlined, 'Draft'),
               ),
               SizedBox(height: 15),
-              SizedBox(height: 15),
-              videoUploaded
-                  ? InkWell(
+              videoUploaded? InkWell(
                 onTap: () {
-                  AddPost(
-                    context,
-                    mode: "Public",
-                    D: description.text,
-                    Thumbnail: '',
-                    creator: '',
-                    video: video,
-                  );
+                  storeFilesLocally().then((_) {
+                          // Once files are stored locally, proceed with upload
+                          uploadFiles();
+                          AddPost(context, mode: 'Public', D: description.text, Thumbnail: '', creator: userid, video: video);
+                        });
                 },
-                child: buildButtonWithIcon(Icons.cloud_upload, 'Submit'),
+                child: buildButtonWithIcon(Icons.cloud_upload, 'Upload Video'),
               )
                   : InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CustomFilePicker();
-                  })).then((value) {
-                    if (value != null && value) {
-                      setState(() {
-                        videoUploaded = true;
-                      });
-                    }
-                  });
+                  pickFile();
                 },
                 child: buildButtonWithIcon(Icons.cloud_upload, 'Post Video'),
               ),
@@ -165,5 +166,52 @@ class _PostPageState extends State<PostPage> {
         ),
       ),
     );
+  }
+
+  Future<void> retrieveData() async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? storedPhone = prefs.getString("phone");
+    setState(() {
+      if(storedPhone != null){
+        userid = storedPhone!;
+        print('This is UserID: $userid');
+      }
+    });
+  }
+
+  pickFile() async {
+    var result = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      type: FileType.custom,
+      allowedExtensions: ['mp4', 'avi', 'mov'],
+    );
+    if (result != null) {
+      setState(() {
+        pickedFiles.clear();
+        pickedFiles.add(File(result.files.single.path!));
+        videoUploaded = true; // Update videoUploaded to true
+      });
+    }
+  }
+
+  Future<void> uploadFiles() async {
+    for (File file in pickedFiles) {
+      print('Uploading file: ${file.path}');
+      setState(() {
+        isfilled = true;
+      });
+    }
+  }
+
+  Future<void> storeFilesLocally() async {
+    Directory appDir = await getApplicationDocumentsDirectory();
+
+    for (File file in pickedFiles) {
+      String fileName = path.basename(file.path);
+      String newPath = '${appDir.path}/$fileName';
+      await file.copy(newPath);
+      print('File stored locally: $newPath');
+    }
   }
 }

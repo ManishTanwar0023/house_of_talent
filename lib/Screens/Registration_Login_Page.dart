@@ -4,6 +4,7 @@ import 'package:house_of_talent/Screens/LogIn.dart';
 
 import '../Colors/Palette.dart';
 import '../CustomWidgets/BuildButton_CustomWidget.dart';
+import '../Model/ApiCallingMethods.dart';
 import 'Register.dart';
 
 class Registration_Login_Page extends StatefulWidget {
@@ -107,6 +108,7 @@ class _Registration_Login_PageState extends State<Registration_Login_Page> {
                         }),
                         Center(child: Text('Or', style: TextStyle(color: Colors.white))),
                         buildButton('Log In', () {
+                          
                           Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
                         }),
                         SizedBox(height: 30),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:house_of_talent/Screens/Cmt_Login.dart';
 import 'package:house_of_talent/Screens/PostPage.dart';
 import 'package:house_of_talent/Screens/Profile.dart';
+import 'package:house_of_talent/Screens/shorts/home.dart';
 
 import 'Competition.dart';
 
@@ -27,11 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final List<Widget> pages = [
-  Competition(),
-    Container(
-      color: Colors.redAccent,
-      child: Center(child: Text('Home')),
-    ),
+    Competition(),
+    ShortVideosScreen(),
     PostPage(),
     Cmt_Login(),
     Profile(),

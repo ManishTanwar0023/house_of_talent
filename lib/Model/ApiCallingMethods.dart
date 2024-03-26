@@ -13,33 +13,33 @@ import 'package:http/http.dart' as http;
 String baseUrl = 'https://testingonme.com/APIFolder/WebService1.asmx';
 String token = 'HMNNOJMIFHAT';
 
-// Future<void> updateProfileImage(
-//     BuildContext context, {
-//       required String pic,
-//       required String emailId,
-//     }) async {
-//   Map<String, String> requestBody = {
-//     "token": token,
-//     'pic': pic,
-//     'emailid': emailId,
-//   };
-//
-//   try {
-//     http.Response response = await http.post(
-//       Uri.parse('$baseUrl/UpdateProfileImage'),
-//       body: requestBody,
-//     );
-//
-//     if (response.statusCode == 200) {
-//       showSnackBar(context,
-//           message: "Profile Updated Successfully", icon: Icons.done);
-//     } else {
-//       log("Failed to update profile image");
-//     }
-//   } catch (e) {
-//     log("Error: $e");
-//   }
-// }
+Future<void> updateProfileImage(
+    BuildContext context, {
+      required String pic,
+      required String emailId,
+    }) async {
+  Map<String, String> requestBody = {
+    "token": token,
+    'pic': pic,
+    'emailid': emailId,
+  };
+
+  try {
+    http.Response response = await http.post(
+      Uri.parse('$baseUrl/UpdateProfileImage'),
+      body: requestBody,
+    );
+
+    if (response.statusCode == 200) {
+      showSnackBar(context,
+          message: "Profile Updated Successfully", icon: Icons.done);
+    } else {
+      log("Failed to update profile image");
+    }
+  } catch (e) {
+    log("Error: $e");
+  }
+}
 
 Future<void> checkFollow(
     BuildContext context, {
@@ -183,13 +183,16 @@ Future<void> editProfile(
     );
 
     if (response.statusCode == 200) {
-      var Response = jsonDecode(response.body)[
-      "message"
-      ];
-      if(Response == "Updated!"){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(),));
+      var responseData = jsonDecode(response.body);
+      var message = responseData["message"];
+
+      if(message == "Updated!"){
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Profile()),
+        );
       }else{
-        snackbar(context, Response, 'Something Went Wrong');
+        snackbar(context, message, 'Something Went Wrong');
       }
     } else {
       throw Exception('Failed to load data');
@@ -226,13 +229,16 @@ Future<void> insertBank(
 
     if (response.statusCode == 200) {
       print('data successfully Added');
-      var Response = jsonDecode(response.body)[
-      "message"
-      ];
-      if(Response == "Bank Inserted!"){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Wallet(),));
+      var dataResponse = jsonDecode(response.body);
+      var message = dataResponse["message"];
+
+      if(message == "Bank Inserted!"){
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Wallet()),
+        );
       }else{
-        snackbar(context, Response, 'Something Went Wrong');
+        snackbar(context, message, 'Something Went Wrong');
       }
     } else {
       throw Exception('Failed to load data');
@@ -413,13 +419,16 @@ Future<void> register(
     );
 
     if (response.statusCode == 200) {
-      var Response = jsonDecode(response.body)[
-      "message"
-      ];
-      if(Response == "Registered!"){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+      var responseData = jsonDecode(response.body);
+      var message = responseData["message"];
+      if(message == "Registered!"){
+        snackbar(context,'Registration', 'Your Data Successfully Registered');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
       }else{
-        snackbar(context, Response, 'Something Went Wrong');
+        snackbar(context, message, 'Something Went Wrong');
       }
     } else {
       throw Exception('Failed to load data');
@@ -456,13 +465,16 @@ Future<void> updateBank(
 
     if (response.statusCode == 200) {
       print('data successfully Added');
-      var Response = jsonDecode(response.body)[
-        "message"
-      ];
-      if(Response == "Bank Inserted!"){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Wallet(),));
+      var dataResponse = jsonDecode(response.body);
+      var message = dataResponse["message"];
+
+      if(message == "Bank Inserted!"){
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Wallet()),
+        );
       }else{
-        snackbar(context, Response, 'Something Went Wrong');
+        snackbar(context, message, 'Something Went Wrong');
       }
     } else {
       throw Exception('Failed to load data');
@@ -521,13 +533,16 @@ Future<void> AddPost(
     );
 
     if (response.statusCode == 200) {
-      var Response = jsonDecode(response.body)[
-      "message"
-      ];
-      if(Response == "Insert!"){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PostPage(),));
+      var dataResponse = jsonDecode(response.body);
+      var message = dataResponse["message"];
+
+      if(message == "Insert!"){
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => PostPage()),
+        );
       }else{
-        snackbar(context, Response, 'Something Went Wrong');
+        snackbar(context, message, 'Something Went Wrong');
       }
     } else {
       // Handle failure
